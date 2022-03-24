@@ -116,6 +116,48 @@ docker exec -it gs_pulsar /pulsar/bin/pulsar-admin functions delete \
 
 Assuming you completed everything above, we can now run our consumer and producer.
 
+### Producer
+
+Run the producer as many times as you like; if Pulsar is running (ie `docker compose up --build`) the producer can start sending data (messages).
+
+```
+$(venv) python3.7 app/producer.py
+```
+
+This producer will send messages directly to our default input topic `cfe-tenant/example-namespace/input-topic`
+
+If you need to change topics for your producer to send to, you can:
+
+```
+$(venv) python3.7 app/producer.py cfe-tenant/example-namespace/topic-that-does-not-yet-exist
+```
+
+if you run this topic, you can use `cfe-tenant/example-namespace/topic-that-does-not-yet-exist` in a consumer too!
+
+### Consumer
+
+Let's boot up our consumer. This will run (and listen) for a producer to start sending items to Pulsar.
+
+#### Default Consumer for the Input Topic
+
+Defaults to listening to `cfe-tenant/example-namespace/input-topic`
+
+```
+$(venv) python3.7 app/consumer.py
+```
+
+The default consumer/topic skips what our Pulsar function does.
+
+### Consumer for the Output Topic
+
+The output topic, as you may be aware, recieves data from the Pulsar Function we implemented above using Python. To listen to that data we must pass our topic in:
+
+```
+$(venv) python3.7 app/consumer.py cfe-tenant/example-namespace/output-topic
+```
+
+> Notice that `cfe-tenant/example-namespace/output-topic` is reused exactly from above
+
 ## 7. Pulsar Admin Reference Commands
 
 ### Tenant List
