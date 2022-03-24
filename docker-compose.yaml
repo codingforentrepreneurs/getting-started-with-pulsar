@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  pulsar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bin/pulsar standalone
+    container_name: gs_pulsar
+    volumes:
+      - pulsardata:/pulsar/data
+      - pulsarconf:/pulsar/conf
+      - ./example_functions:/pulsar/example_functions
+    ports:
+      - 8080:8080
+      - 6650:6650
+
+
+volumes:
+  pulsardata:
+  pulsarconf:
+  example_functions:
+    external: true
