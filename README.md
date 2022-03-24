@@ -1,9 +1,17 @@
 # Getting Started with Pulsar
 
+This repo is an example of using Apache Pulsar. It's made to help you better understand how Pulsar works in a local environmen so you can test all kinds of features of Pulsar.
+
+### Requirements
+
+- Python3.7 installed (The `pulsar-client` requires 3.7)
+- Docker & Docker Compost installed
+
 ## 1. Clone repo
 
 ```
-
+git clone https://github.com/codingforentrepreneurs/getting-started-with-pulsar
+cd getting-started-with-pulsar
 ```
 
 ## 2. Create python3.7 Venv & Install Requirements
